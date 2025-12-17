@@ -1,6 +1,4 @@
-/* ========================================= */
-/* 1. RESET & BASIC SETUP (PENTING)          */
-/* ========================================= */
+/* --- 1. RESET & VARIABLES --- */
 :root {
     --primary: #2563eb;
     --dark: #1e40af;
@@ -16,16 +14,14 @@
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* KUNCI 1: Pastikan HTML dan Body mengisi layar penuh */
-html,
-body {
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-    /* Mencegah geser kanan-kiri */
+html {
     scroll-behavior: smooth;
-    background-color: var(--bg-light);
+}
+
+body {
+    overflow-x: hidden;
     color: var(--text);
+    background: var(--bg-light);
 }
 
 a {
@@ -42,56 +38,36 @@ img {
     height: auto;
 }
 
-/* Utilities */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    position: relative;
 }
 
 .section-padding {
-    padding: 4rem 0;
+    padding: 5rem 0;
 }
 
 .text-center {
     text-align: center;
 }
 
-/* ========================================= */
-/* 2. BACKGROUND SYSTEM (MODERN)             */
-/* ========================================= */
-/* Class ini dipakai di section selain Home */
+/* UTILITY: Background Image Sections */
 .bg-section {
     position: relative;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     color: white;
+    /* Teks jadi putih agar kontras */
 }
 
-.section-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.75);
-    /* Gelap 75% */
-    z-index: 1;
+/* Gambar Latar Per Section (Ganti URL dengan gambar Anda) */
+.hero {
+    background-image: url('https://placehold.co/1920x1080/2563eb/ffffff?text=Hero+BG');
+    min-height: 100vh;
 }
 
-.relative-z {
-    position: relative;
-    z-index: 2;
-}
-
-.bg-section .section-title h2,
-.bg-section .section-title p {
-    color: white;
-}
-
-/* Daftar Gambar Background (Ganti URL-nya nanti) */
 .section-service {
     background-image: url('https://placehold.co/1920x1080/111/fff?text=Service+BG');
 }
@@ -112,53 +88,16 @@ img {
     background-image: url('https://placehold.co/1920x1080/555/fff?text=Contact+BG');
 }
 
-/* ========================================= */
-/* 3. HERO SECTION (ULTIMATE MOBILE FIX)     */
-/* ========================================= */
-.hero {
-    position: relative;
-    width: 100%;
-    /* KUNCI 2: Gunakan 100dvh (Dynamic Height) agar pas di HP modern */
-    height: 100dvh;
-    min-height: 600px;
-    /* Jaga-jaga kalau layarnya terlalu pendek */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    overflow: hidden;
-    /* Potong apapun yang keluar */
-    background-color: var(--primary);
-    /* Warna cadangan saat loading */
-}
-
-/* KUNCI 3: Gambar Background dipisah ke Pseudo-Element ::before */
-/* Ini membuatnya lebih stabil daripada background-image biasa di HP */
-.hero::before {
-    content: "";
+/* Overlay Gelap Transparan (Supaya Teks Terbaca) */
+.section-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* Ganti URL ini dengan gambar gedung asli Anda */
-    background-image: url('https://placehold.co/1920x1080/2563eb/ffffff?text=Hero+BG');
-    background-size: cover;
-    background-position: center;
-    z-index: 0;
-
-    /* Efek Zoom halus saat dimuat */
-    animation: zoomInBg 20s infinite alternate;
-}
-
-@keyframes zoomInBg {
-    0% {
-        transform: scale(1);
-    }
-
-    100% {
-        transform: scale(1.1);
-    }
+    background: rgba(0, 0, 0, 0.7);
+    /* Kegelapan 70% */
+    z-index: 1;
 }
 
 .hero-overlay {
@@ -168,464 +107,23 @@ img {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    /* Overlay Hero */
     z-index: 1;
 }
 
+/* Konten di atas overlay harus punya z-index lebih tinggi */
+.relative-z,
 .hero-content {
     position: relative;
     z-index: 2;
-    /* Konten paling atas */
-    padding: 0 20px;
-    margin-top: 60px;
-    /* Kompensasi navbar */
 }
 
-.hero h1 {
-    font-size: 3.5rem;
-    color: white;
-    font-weight: 900;
-    margin-bottom: 1rem;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-.hero p {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-    color: #f0f0f0;
-}
-
-.cta-btn {
-    background: var(--primary);
-    color: white;
-    padding: 12px 35px;
-    border-radius: 50px;
-    font-weight: bold;
-    transition: 0.3s;
-    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
-}
-
-.cta-btn:hover {
-    background: var(--dark);
-    transform: translateY(-3px);
-}
-
-
-/* ========================================= */
-/* 4. NAVBAR & MENU                          */
-/* ========================================= */
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 0.8rem 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Logo Fix */
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    font-weight: bold;
-    color: var(--primary);
-    font-size: 1.1rem;
-}
-
-.logo img {
-    height: 35px;
-    width: auto;
-    object-fit: contain;
-    display: block;
-}
-
-.nav-links {
-    display: flex;
-    gap: 2rem;
-}
-
-.nav-links a {
-    font-weight: 600;
-    color: #333;
-    transition: 0.3s;
-    font-size: 0.95rem;
-}
-
-.nav-links a:hover {
-    color: var(--primary);
-}
-
-.hamburger {
-    display: none;
-    cursor: pointer;
-    padding: 10px;
-}
-
-.bar {
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px auto;
-    background: #333;
-    transition: 0.3s;
-    border-radius: 2px;
-}
-
-/* ========================================= */
-/* 5. SERVICES, VISION, ETC                  */
-/* ========================================= */
-.service-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.service-box {
-    background: rgba(255, 255, 255, 0.95);
-    color: #333;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    border-bottom: 3px solid transparent;
-    transition: 0.3s;
-}
-
-.service-box:hover {
-    transform: translateY(-5px);
-    border-bottom-color: var(--primary);
-}
-
-.service-box .icon {
-    font-size: 2.5rem;
-    color: var(--primary);
-    margin-bottom: 1rem;
-}
-
-.vision-banner {
-    background: linear-gradient(135deg, var(--primary), #9333ea);
-    color: white;
-    padding: 3rem 1rem;
-    border-radius: 20px;
-    text-align: center;
-    margin-bottom: 3rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.vision-badge {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 5px 15px;
-    border-radius: 20px;
-    display: inline-block;
-    margin-bottom: 1rem;
-    font-weight: bold;
-}
-
-.highlight-gold {
-    border-bottom: 3px solid var(--gold);
-}
-
-.interest-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-bottom: 3rem;
-}
-
-.interest-card {
-    background: rgba(255, 255, 255, 0.95);
-    color: #333;
-    padding: 2rem;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.typo-icon {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    margin: 0 auto 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: 900;
-    font-size: 1.5rem;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-.blue-theme {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
-}
-
-.orange-theme {
-    background: linear-gradient(135deg, #f97316, #ea580c);
-}
-
-.purple-theme {
-    background: linear-gradient(135deg, #a855f7, #9333ea);
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-}
-
-.stat-item {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 1.5rem;
-    text-align: center;
-    border-radius: 10px;
-    color: #333;
-}
-
-.stat-item i {
-    font-size: 2rem;
-    color: var(--primary);
-    margin-bottom: 10px;
-}
-
-/* ========================================= */
-/* 6. PARTNERS, CP, GALLERY, CONTACT         */
-/* ========================================= */
-.cp-slider-container {
-    width: 100%;
-    max-width: 600px;
-    height: 350px;
-    margin: 0 auto 2rem;
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-    border: 4px solid rgba(255, 255, 255, 0.5);
-}
-
-.cp-slide {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: 1s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: white;
-}
-
-.cp-slide.active {
-    opacity: 1;
-}
-
-.cp-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.download-btn {
-    display: inline-block;
-    background: var(--dark);
-    color: white;
-    padding: 12px 30px;
-    border-radius: 50px;
-    font-weight: bold;
-    transition: 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.partners-section {
-    background: white;
-    padding: 2rem 0;
-    overflow: hidden;
-    border-bottom: 1px solid #eee;
-}
-
-.marquee-wrapper {
-    width: 100%;
-    overflow: hidden;
-}
-
-.marquee-content {
-    display: flex;
-    animation: marquee 25s linear infinite;
-}
-
-.partner-item {
-    flex: 0 0 180px;
-    padding: 0 20px;
-    text-align: center;
-}
-
-.partner-item img {
-    height: 60px;
-    width: auto;
-    filter: grayscale(1);
-    opacity: 0.7;
-    transition: 0.3s;
-}
-
-.partner-item:hover img {
-    filter: grayscale(0);
-    opacity: 1;
-    transform: scale(1.1);
-}
-
-@keyframes marquee {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(-100%);
-    }
-}
-
-.gallery-wrapper {
-    height: 400px;
-    position: relative;
-    border-radius: 15px;
-    overflow: hidden;
-    margin-bottom: 2rem;
-    border: 4px solid rgba(255, 255, 255, 0.3);
-}
-
-.gallery-slide {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: 1s;
-}
-
-.gallery-slide.active {
-    opacity: 1;
-}
-
-.gallery-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-}
-
-.contact-box {
-    background: rgba(255, 255, 255, 0.95);
-    color: #333;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.form-group {
-    margin-bottom: 1rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
-}
-
-.submit-btn {
-    width: 100%;
-    padding: 12px;
-    background: var(--primary);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1rem;
-}
-
-/* Maps Fix */
-.map-container {
-    position: relative;
-    width: 100%;
-    height: 350px !important;
-    min-height: 350px;
-    background-color: #e5e7eb;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 1rem;
-    display: block;
-    z-index: 5;
-}
-
-.map-container iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    display: block;
-}
-
-.qr-overlay {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background: white;
-    padding: 8px 12px;
-    border-radius: 8px;
-    text-align: center;
-    font-size: 0.8rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    z-index: 10;
-    color: #333;
-}
-
-.social-links {
-    margin-top: 15px;
-    display: flex;
-    gap: 10px;
-}
-
-.social-links a {
-    width: 40px;
-    height: 40px;
-    background: #eee;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    transition: 0.3s;
-    color: #333;
-}
-
-.social-links a:hover {
-    background: var(--primary);
+/* Override Warna Teks Judul di Section Background */
+.bg-section .section-title h2,
+.bg-section .section-title p {
     color: white;
 }
 
-/* ========================================= */
-/* 7. LOADING, FOOTER, WA                    */
-/* ========================================= */
+/* --- 2. LOADING SCREEN --- */
 #loading-screen {
     position: fixed;
     top: 0;
@@ -660,11 +158,457 @@ img {
     }
 }
 
+/* --- 3. NAVBAR RESPONSIVE --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* --- Bagian NAVBAR (Update Logo) --- */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    color: var(--primary);
+    font-size: 1.1rem;
+    /* Ukuran teks PT LINEKS disesuaikan */
+    text-decoration: none;
+}
+
+.logo img {
+    height: 40px;
+    /* KUNCI UTAMA: Batasi tinggi logo max 40px */
+    width: auto;
+    /* Lebar otomatis agar tidak gepeng */
+    object-fit: contain;
+    /* Memastikan logo tetap proporsional */
+    display: block;
+}
+
+/* Opsional: Agar di HP logo tidak terlalu besar juga */
+@media screen and (max-width: 768px) {
+    .logo img {
+        height: 35px;
+        /* Lebih kecil sedikit di HP */
+    }
+
+    .logo span {
+        font-size: 1rem;
+        /* Teks lebih kecil di HP */
+    }
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    font-weight: 600;
+    color: #333;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background: #333;
+    transition: 0.3s;
+}
+
+/* --- 4. HERO SECTION CONTENT --- */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    color: white;
+    font-weight: 900;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    color: #f0f0f0;
+}
+
+.cta-btn {
+    background: var(--primary);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.cta-btn:hover {
+    background: var(--dark);
+}
+
+/* --- 5. SERVICES GRID --- */
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+/* Kotak tetap putih agar kontras dengan background gelap */
+.service-box {
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.service-box:hover {
+    transform: translateY(-5px);
+    border-bottom: 5px solid var(--primary);
+}
+
+.service-box .icon {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+/* --- 6. VISION & VALUES --- */
+.vision-banner {
+    background: linear-gradient(135deg, var(--primary), #9333ea);
+    color: white;
+    padding: 3rem 1rem;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 3rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.vision-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 5px 15px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.highlight-gold {
+    border-bottom: 3px solid var(--gold);
+}
+
+.interest-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.interest-card {
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+
+.typo-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 900;
+    font-size: 1.5rem;
+}
+
+.blue-theme {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.orange-theme {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+}
+
+.purple-theme {
+    background: linear-gradient(135deg, #a855f7, #9333ea);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    padding: 1.5rem;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.stat-item i {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+/* --- 7. COMPANY PROFILE --- */
+.cp-slider-container {
+    width: 100%;
+    max-width: 600px;
+    height: 350px;
+    margin: 0 auto 2rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 2px solid white;
+}
+
+.cp-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: 1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+}
+
+.cp-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.cp-slide.active {
+    opacity: 1;
+}
+
+.download-btn {
+    display: inline-block;
+    background: var(--dark);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: 0.3s;
+    border: 1px solid white;
+}
+
+/* --- 8. PARTNERS MARQUEE --- */
+.partners-section {
+    background: white;
+    padding: 2rem 0;
+    overflow: hidden;
+}
+
+.marquee-wrapper {
+    width: 100%;
+    overflow: hidden;
+}
+
+.marquee-content {
+    display: flex;
+    animation: marquee 20s linear infinite;
+}
+
+.partner-item {
+    flex: 0 0 200px;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.partner-item img {
+    width: 100px;
+    filter: grayscale(1);
+    transition: 0.3s;
+}
+
+.partner-item:hover img {
+    filter: grayscale(0);
+    transform: scale(1.1);
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-1000px);
+    }
+}
+
+/* --- 9. GALLERY --- */
+.gallery-wrapper {
+    height: 400px;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    border: 2px solid white;
+}
+
+.gallery-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: 1s;
+}
+
+.gallery-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-slide.active {
+    opacity: 1;
+}
+
+/* --- 10. CONTACT --- */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.contact-box {
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* MAP FIX */
+/* --- CSS MAPS FIX --- */
+.map-container {
+    position: relative;
+    width: 100%;
+    /* Gunakan tinggi tetap (fixed) agar browser HP tidak bingung */
+    height: 350px !important;
+    min-height: 350px;
+    background-color: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    z-index: 10;
+    /* Pastikan layer di atas background */
+    display: block;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    /* Mencegah iframe dianggap elemen inline */
+}
+
+.qr-overlay {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.social-links {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.social-links a {
+    width: 35px;
+    height: 35px;
+    background: #eee;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- 11. FOOTER & WA --- */
 footer {
     background: #111;
     color: white;
     padding: 3rem 0 1rem;
-    text-align: center;
 }
 
 .footer-content {
@@ -676,20 +620,20 @@ footer {
     gap: 2rem;
 }
 
-.footer-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
 .footer-left img {
     height: 40px;
 }
 
+.copyright {
+    border-top: 1px solid #333;
+    padding-top: 1rem;
+    color: #888;
+}
+
 .whatsapp-float {
     position: fixed;
-    bottom: 25px;
-    right: 25px;
+    bottom: 20px;
+    right: 20px;
     width: 60px;
     height: 60px;
     background: #25d366;
@@ -698,23 +642,18 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 32px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-    z-index: 9999;
-    transition: 0.3s;
+    font-size: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 999;
 }
 
-.whatsapp-float:hover {
-    transform: scale(1.1);
-}
-
-
 /* ========================================= */
-/* 8. MEDIA QUERIES (MOBILE FIXES)           */
+/* MEDIA QUERIES (RESPONSIVE FIXES)       */
 /* ========================================= */
+
 @media screen and (max-width: 768px) {
 
-    /* Navbar Mobile */
+    /* 1. Navbar Mobile */
     .hamburger {
         display: block;
     }
@@ -738,12 +677,11 @@ footer {
         height: 100vh;
         background: white;
         flex-direction: column;
-        width: 80%;
+        width: 70%;
         align-items: center;
-        justify-content: flex-start;
-        padding-top: 4rem;
-        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+        justify-content: center;
+        transition: 0.4s;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
     }
 
     .nav-links.active {
@@ -751,21 +689,15 @@ footer {
     }
 
     .nav-links li {
-        margin: 1rem 0;
-        width: 100%;
-        text-align: center;
+        margin: 1.5rem 0;
     }
 
-    .nav-links a {
-        display: block;
-        padding: 10px;
-        font-size: 1.1rem;
-    }
-
-    /* Hero Fixes */
+    /* 2. Hero Background Fix */
     .hero {
+        min-height: 100vh;
+        /* Gunakan min-height */
         background-attachment: scroll;
-        /* Wajib di HP */
+        /* PENTING: Fix background zoom di HP */
     }
 
     .hero h1 {
@@ -774,35 +706,31 @@ footer {
 
     .hero p {
         font-size: 1rem;
-        padding: 0 10px;
     }
 
-    /* Layout Stacking */
+    /* 3. Semua Grid jadi 1 Kolom */
     .interest-grid,
     .stats-grid,
     .contact-grid,
     .service-grid {
         grid-template-columns: 1fr !important;
+        /* Paksa 1 kolom */
         gap: 1.5rem;
     }
 
-    /* Footer Stacking */
+    /* 4. Background Attachment Scroll di semua section */
+    .bg-section {
+        background-attachment: scroll;
+    }
+
+    /* 5. Footer stacking */
     .footer-content {
         flex-direction: column;
-        gap: 1.5rem;
+        text-align: center;
     }
 
-    /* Adjustments */
-    .section-padding {
-        padding: 3rem 0;
-    }
-
-    .vision-banner {
-        padding: 2rem 1rem;
-    }
-
-    /* Maps Height Mobile */
-    .map-container {
-        height: 300px !important;
+    /* 6. Partner Marquee */
+    .partner-item {
+        flex: 0 0 150px;
     }
 }
