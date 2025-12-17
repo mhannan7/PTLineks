@@ -7,11 +7,19 @@
     --bg-light: #f9fafb;
 }
 
+/* --- 1. RESET --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    /* Mencegah scroll ke samping */
 }
 
 html {
@@ -64,8 +72,36 @@ img {
 
 /* Gambar Latar Per Section (Ganti URL dengan gambar Anda) */
 .hero {
-    background-image: url('Image/BG_Hero.jpg');
+    position: relative;
+    width: 100%;
+
+    /* FALLBACK untuk browser lama */
     min-height: 100vh;
+
+    /* SOLUSI UTAMA: Gunakan DVH (Dynamic Viewport Height) */
+    /* Ini menyesuaikan tinggi layar HP meski ada address bar browser */
+    min-height: 100dvh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    /* Background Settings */
+    background-image: url('https://placehold.co/1920x1080/2563eb/ffffff?text=Hero+BG');
+    /* Ganti dengan link gambar asli Anda */
+    background-size: cover;
+    /* Memastikan gambar menutup seluruh area */
+    background-position: center;
+    /* Gambar tetap di tengah */
+    background-repeat: no-repeat;
+
+    /* PENTING: Scroll agar tidak nge-zoom aneh di HP */
+    background-attachment: scroll;
+
+    /* Tambahkan padding agar konten tidak tertutup navbar */
+    padding-top: 70px;
+    padding-bottom: 20px;
 }
 
 .section-service {
@@ -106,7 +142,8 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(248, 248, 248, 0.479);
+    background: rgba(0, 0, 0, 0.5);
+    /* Gelapkan gambar 50% */
     z-index: 1;
 }
 
