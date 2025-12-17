@@ -21,15 +21,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const navLinks = document.querySelector('.nav-links');
     const navItems = document.querySelectorAll('.nav-item');
 
-    // Klik Hamburger untuk Buka/Tutup
-    if (hamburger) {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
-    }
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
 
-    // Klik Menu Item untuk Menutup (UX yang baik)
     navItems.forEach(item => {
         item.addEventListener('click', () => {
             hamburger.classList.remove('active');

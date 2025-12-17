@@ -1,27 +1,4 @@
-/* ========================================= */
-/* 9. RESPONSIVE MOBILE                      */
-/* ========================================= */
-@media screen and (max-width: 768px) {
-    .hamburger { display: block; }
-    .hamburger.active .bar:nth-child(2) { opacity: 0; }
-    .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-    .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
-    .nav-links {
-        position: fixed; right: -100%; top: 70px; width: 100%; height: 100vh;
-        background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px);
-        flex-direction: column; align-items: center; padding-top: 3rem; transition: 0.4s;
-    }
-    .nav-links.active { right: 0; }
-    .nav-links li { margin: 1.5rem 0; }
-    .nav-links a { font-size: 1.5rem; }
-
-    .glitch-text { font-size: 2.5rem; }
-    .hero { background-attachment: scroll; } /* FIX HP */
-    
-    .interest-grid, .stats-grid, .contact-grid, .service-grid { grid-template-columns: 1fr; }
-    .footer-content { flex-direction: column; text-align: center; }
-}
+/* --- 1. RESET & VARIABLES --- */
 :root {
     --primary: #2563eb;
     --dark: #1e40af;
@@ -34,6 +11,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* SANGAT PENTING untuk Responsif */
     font-family: 'Segoe UI', sans-serif;
 }
 
@@ -43,8 +21,10 @@ html {
 
 body {
     overflow-x: hidden;
+    /* Mencegah Scroll Samping (Penyebab kelebaran) */
     color: var(--text);
     background: var(--bg-light);
+    width: 100%;
 }
 
 a {
@@ -61,10 +41,14 @@ img {
     height: auto;
 }
 
+/* --- 2. UTILITIES & CONTAINER --- */
 .container {
+    width: 100%;
+    /* Ubah max-width jadi width 100% dengan max */
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    /* Padding kiri kanan agar konten tidak mepet di HP */
 }
 
 .section-padding {
@@ -75,20 +59,18 @@ img {
     text-align: center;
 }
 
-/* UTILITY: Background Image Sections */
+/* Background System */
 .bg-section {
     position: relative;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     color: white;
-    /* Teks jadi putih agar kontras */
 }
 
-/* Gambar Latar Per Section (Ganti URL dengan gambar Anda) */
+/* Gambar Background (Ganti URL Sesuai Keinginan) */
 .hero {
     background-image: url('https://placehold.co/1920x1080/2563eb/ffffff?text=Hero+BG');
-    min-height: 100vh;
 }
 
 .section-service {
@@ -111,42 +93,36 @@ img {
     background-image: url('https://placehold.co/1920x1080/555/fff?text=Contact+BG');
 }
 
-/* Overlay Gelap Transparan (Supaya Teks Terbaca) */
-.section-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    /* Kegelapan 70% */
-    z-index: 1;
-}
-
+.section-overlay,
 .hero-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
 
-/* Konten di atas overlay harus punya z-index lebih tinggi */
+.section-overlay {
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.hero-overlay {
+    background: rgba(0, 0, 0, 0.5);
+}
+
 .relative-z,
 .hero-content {
     position: relative;
     z-index: 2;
 }
 
-/* Override Warna Teks Judul di Section Background */
 .bg-section .section-title h2,
 .bg-section .section-title p {
     color: white;
 }
 
-/* --- 2. LOADING SCREEN --- */
+/* --- 3. LOADING SCREEN --- */
 #loading-screen {
     position: fixed;
     top: 0;
@@ -181,13 +157,13 @@ img {
     }
 }
 
-/* --- 3. NAVBAR RESPONSIVE --- */
+/* --- 4. NAVBAR (PERBAIKAN RESPONSIVE) --- */
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
     background: rgba(255, 255, 255, 0.95);
-    padding: 1rem 0;
+    padding: 0.8rem 0;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
@@ -198,8 +174,6 @@ img {
     align-items: center;
 }
 
-/* --- Bagian NAVBAR (Update Logo) --- */
-
 .logo {
     display: flex;
     align-items: center;
@@ -207,31 +181,12 @@ img {
     font-weight: bold;
     color: var(--primary);
     font-size: 1.1rem;
-    /* Ukuran teks PT LINEKS disesuaikan */
-    text-decoration: none;
 }
 
 .logo img {
-    height: 40px;
-    /* KUNCI UTAMA: Batasi tinggi logo max 40px */
+    height: 35px;
     width: auto;
-    /* Lebar otomatis agar tidak gepeng */
     object-fit: contain;
-    /* Memastikan logo tetap proporsional */
-    display: block;
-}
-
-/* Opsional: Agar di HP logo tidak terlalu besar juga */
-@media screen and (max-width: 768px) {
-    .logo img {
-        height: 35px;
-        /* Lebih kecil sedikit di HP */
-    }
-
-    .logo span {
-        font-size: 1rem;
-        /* Teks lebih kecil di HP */
-    }
 }
 
 .nav-links {
@@ -249,10 +204,10 @@ img {
     color: var(--primary);
 }
 
-/* Hamburger Menu */
 .hamburger {
     display: none;
     cursor: pointer;
+    padding: 10px;
 }
 
 .bar {
@@ -264,12 +219,17 @@ img {
     transition: 0.3s;
 }
 
-/* --- 4. HERO SECTION CONTENT --- */
+/* --- 5. HERO SECTION --- */
 .hero {
+    width: 100%;
+    /* FIX HP: Gunakan min-height 100dvh agar pas layar HP */
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    /* FIX Background Zoom di HP */
+    background-attachment: fixed;
 }
 
 .hero h1 {
@@ -292,21 +252,22 @@ img {
     border-radius: 50px;
     font-weight: bold;
     transition: 0.3s;
+    display: inline-block;
 }
 
 .cta-btn:hover {
     background: var(--dark);
 }
 
-/* --- 5. SERVICES GRID --- */
+/* --- 6. GRIDS & CARDS (RESPONSIVE READY) --- */
 .service-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Auto-fit: Otomatis turun ke bawah jika layar sempit */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     margin-top: 3rem;
 }
 
-/* Kotak tetap putih agar kontras dengan background gelap */
 .service-box {
     background: rgba(255, 255, 255, 0.95);
     color: #333;
@@ -315,11 +276,12 @@ img {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: 0.3s;
+    border-bottom: 3px solid transparent;
 }
 
 .service-box:hover {
     transform: translateY(-5px);
-    border-bottom: 5px solid var(--primary);
+    border-bottom-color: var(--primary);
 }
 
 .service-box .icon {
@@ -328,7 +290,7 @@ img {
     margin-bottom: 1rem;
 }
 
-/* --- 6. VISION & VALUES --- */
+/* Vision & Interest */
 .vision-banner {
     background: linear-gradient(135deg, var(--primary), #9333ea);
     color: white;
@@ -366,7 +328,6 @@ img {
     border-radius: 15px;
     text-align: center;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: 0.3s;
 }
 
 .typo-icon {
@@ -414,8 +375,9 @@ img {
     margin-bottom: 10px;
 }
 
-/* --- 7. COMPANY PROFILE --- */
-.cp-slider-container {
+/* Company Profile & Gallery */
+.cp-slider-container,
+.gallery-wrapper {
     width: 100%;
     max-width: 600px;
     height: 350px;
@@ -426,7 +388,8 @@ img {
     border: 2px solid white;
 }
 
-.cp-slide {
+.cp-slide,
+.gallery-slide {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -438,28 +401,36 @@ img {
     background: white;
 }
 
-.cp-slide img {
+.cp-slide.active,
+.gallery-slide.active {
+    opacity: 1;
+}
+
+.cp-slide img,
+.gallery-slide img {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
-.cp-slide.active {
-    opacity: 1;
+.gallery-slide img {
+    object-fit: cover;
 }
+
+/* Gallery full cover */
 
 .download-btn {
     display: inline-block;
     background: var(--dark);
     color: white;
-    padding: 10px 25px;
+    padding: 12px 30px;
     border-radius: 50px;
     font-weight: bold;
     transition: 0.3s;
     border: 1px solid white;
 }
 
-/* --- 8. PARTNERS MARQUEE --- */
+/* Partners Marquee */
 .partners-section {
     background: white;
     padding: 2rem 0;
@@ -477,13 +448,14 @@ img {
 }
 
 .partner-item {
-    flex: 0 0 200px;
+    flex: 0 0 180px;
     padding: 0 20px;
     text-align: center;
 }
 
 .partner-item img {
-    width: 100px;
+    height: 60px;
+    width: auto;
     filter: grayscale(1);
     transition: 0.3s;
 }
@@ -499,39 +471,11 @@ img {
     }
 
     100% {
-        transform: translateX(-1000px);
+        transform: translateX(-100%);
     }
 }
 
-/* --- 9. GALLERY --- */
-.gallery-wrapper {
-    height: 400px;
-    position: relative;
-    border-radius: 15px;
-    overflow: hidden;
-    margin-bottom: 2rem;
-    border: 2px solid white;
-}
-
-.gallery-slide {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: 1s;
-}
-
-.gallery-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.gallery-slide.active {
-    opacity: 1;
-}
-
-/* --- 10. CONTACT --- */
+/* Contact Form & Maps */
 .contact-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -559,9 +503,10 @@ img {
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    font-size: 1rem;
 }
 
 .submit-btn {
@@ -573,22 +518,20 @@ img {
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
+    font-size: 1rem;
 }
 
-/* MAP FIX */
-/* --- CSS MAPS FIX --- */
+/* Maps Fix Mobile */
 .map-container {
     position: relative;
     width: 100%;
-    /* Gunakan tinggi tetap (fixed) agar browser HP tidak bingung */
     height: 350px !important;
+    /* Paksa tinggi */
     min-height: 350px;
     background-color: #e5e7eb;
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 1rem;
-    z-index: 10;
-    /* Pastikan layer di atas background */
     display: block;
 }
 
@@ -626,11 +569,12 @@ img {
     justify-content: center;
 }
 
-/* --- 11. FOOTER & WA --- */
+/* Footer & WA */
 footer {
     background: #111;
     color: white;
     padding: 3rem 0 1rem;
+    text-align: center;
 }
 
 .footer-content {
@@ -640,6 +584,12 @@ footer {
     flex-wrap: wrap;
     margin-bottom: 2rem;
     gap: 2rem;
+}
+
+.footer-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .footer-left img {
@@ -670,12 +620,12 @@ footer {
 }
 
 /* ========================================= */
-/* MEDIA QUERIES (RESPONSIVE FIXES)       */
+/* BAGIAN KHUSUS FIX MOBILE (MEDIA QUERIES)  */
 /* ========================================= */
 
 @media screen and (max-width: 768px) {
 
-    /* 1. Navbar Mobile */
+    /* 1. Navbar menjadi Slide-in Menu */
     .hamburger {
         display: block;
     }
@@ -699,11 +649,12 @@ footer {
         height: 100vh;
         background: white;
         flex-direction: column;
-        width: 70%;
+        width: 80%;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
+        padding-top: 4rem;
         transition: 0.4s;
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
     }
 
     .nav-links.active {
@@ -712,14 +663,24 @@ footer {
 
     .nav-links li {
         margin: 1.5rem 0;
+        width: 100%;
+        text-align: center;
     }
 
-    /* 2. Hero Background Fix */
+    .nav-links a {
+        display: block;
+        padding: 10px;
+        font-size: 1.2rem;
+    }
+
+    /* 2. Fix Hero di HP */
     .hero {
-        min-height: 100vh;
-        /* Gunakan min-height */
+        /* Ganti ke scroll agar background tidak ke-zoom parah di HP */
         background-attachment: scroll;
-        /* PENTING: Fix background zoom di HP */
+        min-height: 100vh;
+        /* Pastikan full screen */
+        padding: 80px 20px 20px;
+        /* Tambah padding atas agar tidak ketabrak navbar */
     }
 
     .hero h1 {
@@ -730,29 +691,33 @@ footer {
         font-size: 1rem;
     }
 
-    /* 3. Semua Grid jadi 1 Kolom */
+    /* 3. Stacking Layout (Grid jadi 1 kolom) */
     .interest-grid,
     .stats-grid,
-    .contact-grid,
-    .service-grid {
-        grid-template-columns: 1fr !important;
-        /* Paksa 1 kolom */
-        gap: 1.5rem;
+    .contact-grid {
+        grid-template-columns: 1fr;
+        /* Paksa 1 kolom ke bawah */
+        gap: 2rem;
     }
 
-    /* 4. Background Attachment Scroll di semua section */
+    /* 4. Fix Background Attachment di semua section */
     .bg-section {
         background-attachment: scroll;
     }
 
-    /* 5. Footer stacking */
+    /* 5. Footer Stacking */
     .footer-content {
         flex-direction: column;
-        text-align: center;
     }
 
     /* 6. Partner Marquee */
     .partner-item {
         flex: 0 0 150px;
+    }
+
+    /* 7. Gallery & CP Slider Height */
+    .gallery-wrapper,
+    .cp-slider-container {
+        height: 250px;
     }
 }
