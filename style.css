@@ -376,13 +376,15 @@ img {
     margin-bottom: 10px;
 }
 
-/* MODIFIKASI: Ukuran Company Profile (2479x3510) */
+/* --- UPDATE: COMPANY PROFILE & GALLERY (STANDARD PORTRAIT SIZE) --- */
+
+/* 1. Pengaturan Wadah (Container) */
 .cp-slider-container {
     width: 100%;
-    max-width: 100%;
-    /* Pastikan full width di containernya */
+    /* INI KUNCINYA: Batasi lebar maksimal agar di Laptop tidak raksasa */
+    max-width: 450px;
 
-    /* MODIFIKASI: Aspect Ratio sesuai permintaan */
+    /* Paksa Rasio Asli (2479 lebar / 3510 tinggi) */
     aspect-ratio: 2479 / 3510;
 
     position: relative;
@@ -390,16 +392,16 @@ img {
     border-radius: 10px;
     border: 1px solid #ddd;
     margin: 0 auto 2rem;
+    /* Posisi Tengah */
     background: #f0f0f0;
 }
 
-/* MODIFIKASI: Ukuran Gallery (640x800) */
 .gallery-wrapper {
     width: 100%;
-    max-width: 640px;
-    /* Batasi lebar agar tidak terlalu besar di desktop */
+    /* INI KUNCINYA: Batasi lebar maksimal untuk Galeri juga */
+    max-width: 400px;
 
-    /* MODIFIKASI: Aspect Ratio sesuai permintaan */
+    /* Paksa Rasio Asli (640 lebar / 800 tinggi) */
     aspect-ratio: 640 / 800;
 
     position: relative;
@@ -407,37 +409,54 @@ img {
     border-radius: 15px;
     border: 2px solid white;
     margin: 0 auto 2rem;
+    /* Posisi Tengah */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* MODIFIKASI: Pastikan gambar mengisi area dengan benar */
-.cp-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    /* Agar dokumen terlihat utuh */
-}
-
+/* 2. Pengaturan Gambar agar FULL IMAGE (Tidak Terpotong) */
+.cp-slide img,
 .gallery-slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    /* Agar foto terlihat penuh */
+    /* CONTAIN = Pastikan seluruh gambar masuk ke dalam kotak tanpa terpotong */
+    object-fit: contain;
+    display: block;
 }
 
-/* Reset height statis di Mobile agar mengikuti aspect-ratio */
-@media screen and (max-width: 768px) {
-
-    .gallery-wrapper,
-    .cp-slider-container {
-        height: auto;
-        /* Jangan di-set pixel mati, biarkan aspect-ratio bekerja */
-    }
+/* 3. Animasi Slider */
+.cp-slide,
+.gallery-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: 1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    /* Latar putih jika gambar tidak memenuhi rasio */
 }
 
 .cp-slide.active,
 .gallery-slide.active {
     opacity: 1;
+    z-index: 1;
+}
+
+/* 4. RESET RESPONSIVE (PENTING) */
+/* Hapus paksaan tinggi di HP agar mengikuti aspect-ratio di atas */
+@media screen and (max-width: 768px) {
+
+    .gallery-wrapper,
+    .cp-slider-container {
+        height: auto !important;
+        /* Biarkan otomatis */
+        max-width: 80%;
+        /* Di HP, gunakan 80% lebar layar agar manis */
+    }
 }
 
 
