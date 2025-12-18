@@ -235,7 +235,7 @@ img {
     /* FIX HP: Gunakan min-height 100dvh agar pas layar HP */
     min-height: 100vh;
     display: flex;
-    /* align-items: center; */
+    align-items: center;
     justify-content: center;
     text-align: left;
     /* FIX Background Zoom di HP */
