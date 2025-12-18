@@ -36,7 +36,17 @@ document.addEventListener('DOMContentLoaded', function () {
             navLinks.classList.remove('active');
         });
     });
+    const navbar = document.querySelector('.navbar');
 
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 50) {
+            // Jika di-scroll ke bawah lebih dari 50px, tambah class 'scrolled' (Background Putih)
+            navbar.classList.add('scrolled');
+        } else {
+            // Jika kembali ke paling atas, hapus class 'scrolled' (Background Transparan)
+            navbar.classList.remove('scrolled');
+        }
+    });
     // 3. AUTO SLIDERS
     function setupSlider(selector, intervalTime) {
         const slides = document.querySelectorAll(selector);

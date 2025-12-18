@@ -168,14 +168,26 @@ img {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 } */
-.navbar {
+.nav {
     position: fixed;
     top: 0;
     width: 100%;
-    /* MODIFIKASI: Transparansi dikurangi (0.95 -> 1.0) & Padding dikurangi (0.8rem -> 0.4rem) */
+    /* Awalnya Transparan */
     background: rgba(255, 255, 255, 0);
     padding: 0.3rem 0;
     z-index: 1000;
+    /* Efek transisi halus saat berubah warna */
+    transition: background 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Class tambahan ini akan aktif lewat Javascript saat di-scroll */
+.nav.scrolled {
+    background: rgba(255, 255, 255, 1);
+    /* Menjadi Putih Solid */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* Tambah bayangan */
+    padding: 0.5rem 0;
+    /* Sedikit menebal saat scroll (opsional) */
 }
 
 .nav-container {
@@ -230,22 +242,64 @@ img {
 }
 
 /* --- 5. HERO SECTION --- */
+/* --- MODIFIKASI NAVBAR --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    /* Awalnya Transparan */
+    background: rgba(255, 255, 255, 0);
+    padding: 0.3rem 0;
+    z-index: 1000;
+    /* Efek transisi halus saat berubah warna */
+    transition: background 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Class tambahan ini akan aktif lewat Javascript saat di-scroll */
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 1);
+    /* Menjadi Putih Solid */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* Tambah bayangan */
+    padding: 0.5rem 0;
+    /* Sedikit menebal saat scroll (opsional) */
+}
+
+/* --- MODIFIKASI HERO SECTION (Desktop Center, HP Left) --- */
 .hero {
     width: 100%;
     /* FIX HP: Gunakan min-height 100dvh agar pas layar HP */
-    min-height: 100vh;
+    min-height: 100dvh;
+    /* Gunakan dvh agar lebih akurat di HP */
+
     display: flex;
     align-items: center;
+    /* Vertikal tetap tengah */
+
+    /* DEFAULT (Desktop/Laptop): Rata Tengah */
     justify-content: center;
-    text-align: left;
-    /* FIX Background Zoom di HP */
-    background-attachment: fixed;
+    text-align: center;
+
+    /* Background settings */
+    background-image: url('Image/BG_Hero.jpg');
+    /* Pastikan path gambar benar */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* FIX Background Zoom di HP: Gunakan scroll */
+    background-attachment: scroll;
+
+    position: relative;
+    padding-top: 60px;
+    /* Jarak untuk navbar */
 }
 
+/* Style Default H1 & P (Desktop) */
 .hero h1 {
     font-size: 3.5rem;
     color: white;
-    font-weight: 900;
+    /* font-weight: 900; */
     margin-bottom: 1rem;
 }
 
@@ -267,6 +321,28 @@ img {
 
 .cta-btn:hover {
     background: var(--dark);
+}
+
+/* --- MEDIA QUERY KHUSUS HP (Max-width 768px) --- */
+@media screen and (max-width: 768px) {
+    .hero {
+        /* HP: Ubah jadi Rata Kiri */
+        justify-content: flex-start;
+        text-align: left;
+        padding-left: 20px;
+        /* Beri jarak dari pinggir kiri */
+        padding-right: 20px;
+    }
+
+    .hero-content {
+        width: 100%;
+        /* Pastikan konten mengisi lebar */
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+        /* Kecilkan font sedikit di HP */
+    }
 }
 
 /* --- 6. GRIDS & CARDS (RESPONSIVE READY) --- */
