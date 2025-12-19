@@ -772,10 +772,10 @@ footer {
         position: fixed;
         right: -100%;
         top: 60px;
-        height: 70vh;
+        height: 78vh;
         background: white;
         flex-direction: column;
-        width: 41%;
+        width: 45%;
         align-items: center;
         justify-content: flex-start;
         /* padding-top: 3rem; */
@@ -796,7 +796,7 @@ footer {
     .nav-links a {
         display: block;
         padding: 10px;
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
     /* 2. Fix Hero di HP */
