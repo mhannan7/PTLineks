@@ -581,19 +581,15 @@ img {
     flex: 0 0 180px;
     padding: 0 20px;
     text-align: center;
+    padding-top: 5px;
 }
 
 .partner-item img {
     height: 60px;
     width: auto;
-    filter: grayscale(1);
     transition: 0.3s;
 }
 
-.partner-item:hover img {
-    filter: grayscale(0);
-    transform: scale(1.1);
-}
 
 @keyframes marquee {
     0% {
@@ -776,13 +772,13 @@ footer {
         position: fixed;
         right: -100%;
         top: 60px;
-        height: 100vh;
+        height: 70vh;
         background: white;
         flex-direction: column;
-        width: 80%;
+        width: 41%;
         align-items: center;
         justify-content: flex-start;
-        padding-top: 4rem;
+        /* padding-top: 3rem; */
         transition: 0.4s;
         box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
     }
