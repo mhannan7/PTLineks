@@ -570,15 +570,24 @@ img {
 .marquee-wrapper {
     width: 100%;
     overflow: hidden;
+    /* Tambahan opsional: agar masking rapi */
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
 .marquee-content {
     display: flex;
-    animation: marquee 20s linear infinite;
+    /* FIX PENTING: max-content memaksa container selebar jumlah total gambar */
+    /* Ini yang membuat semua gambar muncul di HP */
+    width: max-content;
+
+    /* Animasi berjalan terus menerus */
+    animation: marquee 40s linear infinite;
 }
 
 .partner-item {
     flex: 0 0 180px;
+    /* Tidak dirubah: ukuran tetap */
     padding: 0 20px;
     text-align: center;
     padding-top: 5px;
@@ -586,18 +595,21 @@ img {
 
 .partner-item img {
     height: 60px;
+    /* Tidak dirubah: ukuran tetap */
     width: auto;
     transition: 0.3s;
 }
 
-
+/* FIX ANIMASI: Ubah translateX jadi -50% */
 @keyframes marquee {
     0% {
         transform: translateX(0);
     }
 
     100% {
-        transform: translateX(-100%);
+        /* Kita ubah ke -50% karena kita akan menduplikasi item di HTML */
+        /* Ini membuat perputaran menjadi mulus (seamless) */
+        transform: translateX(-50%);
     }
 }
 
