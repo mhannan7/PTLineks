@@ -379,8 +379,8 @@ img {
 
 /* Vision & Interest */
 .vision-banner {
-    background: white;
-    color: black;
+    background: rgba(254, 254, 255, 0.979);
+    color: rgb(46, 45, 45);
     padding: 3rem 1rem;
     border-radius: 20px;
     text-align: center;
@@ -388,8 +388,13 @@ img {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
+.vision-badge,
+h1 {
+    color: white;
+}
+
 .vision-badge {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--gold);
     padding: 5px 15px;
     border-radius: 20px;
     display: inline-block;

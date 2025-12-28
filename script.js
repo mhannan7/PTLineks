@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
             btn.innerText = 'Mengirim...';
             btn.disabled = true;
 
-            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+            emailjs.sendForm('service_jsj6gdz', 'template_2bax98c', this)
                 .then(() => {
                     btn.innerText = 'Terkirim!';
                     btn.style.background = '#28a745';
