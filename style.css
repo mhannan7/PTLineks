@@ -379,8 +379,8 @@ img {
 
 /* Vision & Interest */
 .vision-banner {
-    background: linear-gradient(135deg, var(--primary), #9333ea);
-    color: white;
+    background: white;
+    color: black;
     padding: 3rem 1rem;
     border-radius: 20px;
     text-align: center;
